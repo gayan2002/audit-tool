@@ -26,8 +26,8 @@ from scraper import scrape_page
 
 load_dotenv()
 
-APP_URL  = "https://audit-tool-production-6990.up.railway.app"
-LOGS_URL = "https://audit-tool-production-6990.up.railway.app/logs"
+APP_URL  = "https://audittool-production.up.railway.app"
+LOGS_URL = "https://audittool-production.up.railway.app/logs"
 
 app = FastAPI(
     title="Page Audit Tool",
