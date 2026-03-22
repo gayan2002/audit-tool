@@ -132,7 +132,14 @@ def _fetch_html(url: str) -> tuple:
         return html, "static"
 
     # ── Tier 3: Playwright for JS-rendered pages ──────────────────── #
-    return _fetch_with_playwright(url), "playwright"
+    try:
+        return _fetch_with_playwright(url), "playwright"
+    except Exception as e:
+        error_msg = str(e).lower()
+        # If Playwright binary missing (hosting env) — fall back to static HTML
+        if "executable doesn't exist" in error_msg or "playwright" in error_msg:
+            return html, "static-fallback"
+        raise
 
 
 def _fetch_with_playwright(url: str) -> str:

@@ -230,10 +230,10 @@
 
     const rm = m.render_method || 'static';
     const badge = document.getElementById('renderBadge');
-    const labels = { 'static':'⚡ Static HTML', 'next.js-ssr':'⚡ Next.js SSR', 'playwright':'⚡ JS-Rendered (Playwright)' };
+    const labels = { 'static':'⚡ Static HTML', 'next.js-ssr':'⚡ Next.js SSR', 'playwright':'⚡ JS-Rendered (Playwright)', 'static-fallback':'⚠ Static Fallback (Playwright unavailable)' };
     badge.textContent = labels[rm] || '⚡ ' + rm;
-    badge.style.color = rm === 'playwright' ? 'var(--blue)' : rm === 'next.js-ssr' ? 'var(--fair)' : 'var(--good)';
-    badge.style.borderColor = rm === 'playwright' ? '#1e3a5f' : rm === 'next.js-ssr' ? '#3d3310' : '#1f4030';
+    badge.style.color = rm === 'playwright' ? 'var(--blue)' : rm === 'next.js-ssr' ? 'var(--fair)' : rm === 'static-fallback' ? 'var(--poor)' : 'var(--good)';
+    badge.style.borderColor = rm === 'playwright' ? '#1e3a5f' : rm === 'next.js-ssr' ? '#3d3310' : rm === 'static-fallback' ? '#4a2020' : '#1f4030';
 
     const { word_count, headings, cta_primary_count, cta_secondary_count, cta_raw_total, links, images } = m;
     const hi = (m.heading_issues || []);
