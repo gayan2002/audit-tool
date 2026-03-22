@@ -3,6 +3,4 @@ __pycache__/
 *.pyc
 .venv/
 venv/
-prompt_logs/
-!prompt_logs/*.json
 .DS_Store
