@@ -1,4 +1,4 @@
-# Page Audit Tool — v3
+# Page Audit Tool 
 
 An AI-powered single-page website auditor. Works on all tech stacks. Drop in a URL and get factual metrics plus grounded AI insights in seconds.
 
