@@ -6,6 +6,7 @@ FastAPI application. Thin orchestration layer.
 
 import os
 import sys
+import json
 
 # Windows: switch to ProactorEventLoop so Playwright subprocesses work
 if sys.platform == "win32":
@@ -24,6 +25,9 @@ from ai_engine import generate_insights
 from scraper import scrape_page
 
 load_dotenv()
+
+APP_URL  = "https://audit-tool-production-6990.up.railway.app"
+LOGS_URL = "https://audit-tool-production-6990.up.railway.app/logs"
 
 app = FastAPI(
     title="Page Audit Tool",
@@ -74,9 +78,50 @@ async def audit(request: AuditRequest):
     return {"metrics": metrics_clean, "insights": insights}
 
 
+@app.get("/logs", response_class=JSONResponse)
+async def get_logs():
+    """
+    Returns the last 5 prompt logs.
+    Each log contains: system prompt, user prompt (with metrics payload),
+    raw model output, and token usage.
+    Useful for evaluating AI grounding and prompt design.
+    """
+    log_dir = "prompt_logs"
+    if not os.path.exists(log_dir):
+        return {
+            "count": 0,
+            "logs": [],
+            "message": "No logs yet — run an audit first."
+        }
+
+    files = sorted(
+        [f for f in os.listdir(log_dir) if f.endswith(".json")],
+        reverse=True
+    )[:5]
+
+    logs = []
+    for f in files:
+        try:
+            with open(f"{log_dir}/{f}", encoding="utf-8") as fp:
+                logs.append(json.load(fp))
+        except Exception:
+            continue
+
+    return {
+        "count":    len(logs),
+        "logs_url": LOGS_URL,
+        "logs":     logs
+    }
+
+
 @app.get("/health")
 async def health():
-    return {"status": "ok", "version": "3.0.0"}
+    return {
+        "status":   "ok",
+        "version":  "3.0.0",
+        "app_url":  APP_URL,
+        "logs_url": LOGS_URL,
+    }
 
 
 if __name__ == "__main__":

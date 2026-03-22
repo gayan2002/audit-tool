@@ -1,8 +1,20 @@
-# Page Audit Tool 
+# Page Audit Tool — v3
 
 An AI-powered single-page website auditor. Works on all tech stacks. Drop in a URL and get factual metrics plus grounded AI insights in seconds.
 
 Built for EIGHT25MEDIA's AI-Native Software Engineer assignment.
+
+---
+
+## Live Demo
+
+| Link | Description |
+|------|-------------|
+| **App** | https://audit-tool-production-6990.up.railway.app |
+| **Prompt Logs** | https://audit-tool-production-6990.up.railway.app/logs |
+| **GitHub** | https://github.com/gayan2002/audit-tool |
+
+> The `/logs` endpoint returns the last 5 prompt logs as JSON — showing the full system prompt, structured metrics payload sent to the AI, and raw model output before parsing.
 
 ---
 
