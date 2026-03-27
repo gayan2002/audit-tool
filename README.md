@@ -21,7 +21,7 @@ Built for EIGHT25MEDIA's AI-Native Software Engineer assignment.
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-username/audit-tool
+git clone https://github.com/gayan2002/audit-tool
 cd audit-tool
 
 pip install -r requirements.txt
